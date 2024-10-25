@@ -6,14 +6,14 @@ resource "aws_lambda_function" "test_lambda" {
 
   source_code_hash = var.hash == null ? filebase64sha256(var.filename) : var.hash
 
-  runtime     = var.runtime
-  timeout     = var.timeout
-  memory_size = var.memory_size
+  runtime                        = var.runtime
+  timeout                        = var.timeout
+  memory_size                    = var.memory_size
   reserved_concurrent_executions = var.reserved_concurrent_executions
 
   environment {
     variables = {
-        DYNAMODB_TABLE = var.dynamodb_name
+      DYNAMODB_TABLE = var.dynamodb_name
     }
   }
 }
