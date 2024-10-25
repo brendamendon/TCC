@@ -12,12 +12,6 @@ variable "http_method" {
   default     = "POST"
 }
 
-variable "type_integration" {
-  description = "Method HTTP"
-  type        = string
-  default     = "POST"
-}
-
 #-#-# DYNAMODB #-#-#
 
 variable "dynamodb_name" {
@@ -67,7 +61,7 @@ variable "runtime" {
 variable "filename" {
   type        = string
   description = "Filename of the lambda script."
-  default     = "../app/LambdaFunctionOverHttps.py"
+  default     = "../app/LambdaFunctionOverHttps.zip"
 }
 
 variable "handler" {
