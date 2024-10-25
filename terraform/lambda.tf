@@ -13,7 +13,7 @@ resource "aws_lambda_function" "test_lambda" {
 
   environment {
     variables = {
-      DYNAMODB_TABLE = var.hash_name
+      DYNAMODB_TABLE = var.hash_key
     }
   }
 }
