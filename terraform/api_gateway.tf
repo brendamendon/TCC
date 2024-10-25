@@ -25,6 +25,7 @@ resource "aws_api_gateway_integration" "lambda_integration" {
   cache_namespace         = "lambda-cache"
   timeout_milliseconds    = 29000
   integration_http_method = "POST"
+  uri                     = aws_lambda_function.lambda.invoke_arn
 
   request_parameters = {
     "integration.request.header.X-Authorization" = "'static'"
