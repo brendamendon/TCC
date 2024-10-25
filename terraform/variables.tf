@@ -55,24 +55,25 @@ variable "autoscaling_enabled" {
 variable "lambda_name" {
   type        = string
   description = "Name of the Lambda Function."
-  default     = ""
+  default     = "lambda-tcc"
 }
 
 variable "runtime" {
   type        = string
   description = "Engine used to execute script in Lambda."
-  default     = ""
+  default     = "python3.12"
 }
 
 variable "filename" {
   type        = string
   description = "Filename of the lambda script."
+  default     = "../app/LambdaFunctionOverHttps.py"
 }
 
 variable "handler" {
   type        = string
   description = "File that will execute the Lambda."
-  default     = ""
+  default     = "LambdaFunctionOverHttps.lambda_handler"
 }
 
 variable "hash" {
