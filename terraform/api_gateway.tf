@@ -22,7 +22,7 @@ resource "aws_api_gateway_integration" "lambda_integration" {
     http_method          = aws_api_gateway_method.lambda_method.http_method
     type                 = "AWS_POXY"
     cache_key_parameters = ["method.request.path.param"]
-    cache_namespace      = "foobar"
+    cache_namespace      = "lambda-cache"
     timeout_milliseconds = 29000
 
     request_parameters = {
