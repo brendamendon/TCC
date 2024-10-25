@@ -23,13 +23,19 @@ variable "type_integration" {
 variable "dynamodb_name" {
   description = "Name of the DynamoDB table"
   type        = string
-  default     = "usuarios"
+  default     = "tcc-database"
 }
 
 variable "hash_key" {
   description = "The attribute to serve as the hash (partition) key. It must also be defined as an attribute."
   type        = string
   default     = null
+}
+
+variable "hash_name" {
+  description = "The attribute to serve as the hash (partition) key. It must also be defined as an attribute."
+  type        = string
+  default     = "usuarios"
 }
 
 variable "hash_type" {

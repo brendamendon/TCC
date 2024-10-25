@@ -4,7 +4,7 @@ resource "aws_dynamodb_table" "this" {
   hash_key     = var.hash_key
 
   attribute {
-    name = var.hash_key
+    name = var.hash_name
     type = var.hash_type
   }
 }
