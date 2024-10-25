@@ -20,7 +20,7 @@ resource "aws_api_gateway_integration" "lambda_integration" {
   rest_api_id          = aws_api_gateway_rest_api.this.id
   resource_id          = aws_api_gateway_resource.lambda_resource.id
   http_method          = aws_api_gateway_method.lambda_method.http_method
-  type                 = "AWS_POXY"
+  type                 = "AWS_PROXY"
   cache_key_parameters = ["method.request.path.param"]
   cache_namespace      = "lambda-cache"
   timeout_milliseconds = 29000
