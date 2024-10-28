@@ -1,16 +1,22 @@
 name: "Terraform Infrastructure Change Management Pipeline with GitHub Actions"
  
 on:
- push:
-   branches:
-   - main
-   paths:
-   - terraform/**
- pull_request:
-   branches:
-   - main
-   paths:
-   - app/**
+  workflow_dispatch:
+    inputs:
+      action:
+        description: 'Action to perform (apply or destroy)'
+        required: true
+        default: 'apply'
+  push:
+    branches:
+      - main
+    paths:
+      - terraform/**
+  pull_request:
+    branches:
+      - main
+    paths:
+      - app/**
  
 env:
  TF_LOG: INFO
@@ -85,6 +91,14 @@ jobs:
        if: steps.plan.outcome == 'failure'
        run: exit 1
  
-     - name: Terraform Apply
+     - name: Terraform Apply or Destroy
        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-       run: terraform apply -auto-approve -input=false
+       run: |
+         if [ "${{ github.event.inputs.action }}" == "apply" ]; then
+           terraform apply -auto-approve -input=false
+         elif [ "${{ github.event.inputs.action }}" == "destroy" ]; then
+           terraform destroy -auto-approve -input=false
+         else
+           echo "Invalid action. Use 'apply' or 'destroy'."
+           exit 1
+         fi

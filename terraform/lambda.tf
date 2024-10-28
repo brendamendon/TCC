@@ -19,11 +19,31 @@ resource "aws_lambda_function" "lambda" {
 }
 
 resource "aws_iam_role" "iam_for_lambda" {
-  name               = var.name_iam_role == "" ? "${var.lambda_name}-role" : var.name_iam_role
+  name               = "${var.lambda_name}-role"
   assume_role_policy = var.assume_role_policy
 }
 
 resource "aws_iam_role_policy_attachment" "lambda_dynamodb_access" {
   role       = aws_iam_role.iam_for_lambda.name
   policy_arn = aws_iam_policy.dynamodb_access.arn
+}
+
+resource "aws_iam_policy" "dynamodb_access" {
+  name        = "${var.lambda_name}-role"
+  description = "Allows the Lambda function to perform CRUD operations on the DynamoDB table"
+  policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Action = [
+          "dynamodb:GetItem",
+          "dynamodb:PutItem",
+          "dynamodb:UpdateItem",
+          "dynamodb:DeleteItem"
+        ],
+        Resource = aws_dynamodb_table.this.arn
+      }
+    ]
+  })
 }

@@ -94,12 +94,6 @@ variable "timeout" {
   default     = 3
 }
 
-variable "name_iam_role" {
-  type        = string
-  description = "Name of iam role used in Lambda."
-  default     = ""
-}
-
 variable "assume_role_policy" {
   description = "Default assume role policy of the iam role."
   default     = <<JSON
