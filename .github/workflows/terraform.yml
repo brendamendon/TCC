@@ -94,9 +94,10 @@ jobs:
      - name: Terraform Apply or Destroy
        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
        run: |
-         if [ "${{ github.event.inputs.action }}" == "apply" ]; then
+         ACTION="${{ github.event.inputs.action || 'apply' }}"
+         if [ "$ACTION" == "apply" ]; then
            terraform apply -auto-approve -input=false
-         elif [ "${{ github.event.inputs.action }}" == "destroy" ]; then
+         elif [ "$ACTION" == "destroy" ]; then
            terraform destroy -auto-approve -input=false
          else
            echo "Invalid action. Use 'apply' or 'destroy'."
