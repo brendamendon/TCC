@@ -56,12 +56,10 @@ jobs:
  
      - name: Terraform plan
        id: plan
-       if: github.event_name == 'pull_request'
        run: terraform plan -no-color -input=false
        continue-on-error: true
     
      - uses: actions/github-script@v6
-       if: github.event_name == 'pull_request'
        env:
          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
        with:
@@ -92,7 +90,7 @@ jobs:
        run: exit 1
  
      - name: Terraform Apply or Destroy
-       if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+       if: github.ref == 'refs/heads/main'
        run: |
          ACTION="${{ github.event.inputs.action || 'apply' }}"
          echo "Action selected: $ACTION"
