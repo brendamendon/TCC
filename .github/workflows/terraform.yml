@@ -60,10 +60,12 @@ jobs:
        continue-on-error: true
     
      - uses: actions/github-script@v6
+       if: github.event_name == 'pull_request'
        env:
          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
        with:
          script: |
+          if (context.issue.number) {
            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
            #### Terraform Initialization\`${{ steps.init.outcome }}\`
            #### Terraform Validation\`${{ steps.validate.outcome }}\`
@@ -84,6 +86,9 @@ jobs:
              repo: context.repo.repo,
              body: output
            })
+          } else {
+            console.log("It was not possible to comment as there is no issue number");
+          }
  
      - name: Terraform Plan Status
        if: steps.plan.outcome == 'failure'
