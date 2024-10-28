@@ -95,6 +95,7 @@ jobs:
        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
        run: |
          ACTION="${{ github.event.inputs.action || 'apply' }}"
+         echo "Action selected: $ACTION"
          if [ "$ACTION" == "apply" ]; then
            terraform apply -auto-approve -input=false
          elif [ "$ACTION" == "destroy" ]; then
