@@ -21,15 +21,11 @@ def update(payload):
 def delete(payload):
     return dynamo.delete_item(Key=payload['Key'])
 
-def echo(payload):
-    return payload
-
 operations = {
     'create': create,
     'read': read,
     'update': update,
     'delete': delete,
-    'echo': echo,
 }
 
 def lambda_handler(event, context):

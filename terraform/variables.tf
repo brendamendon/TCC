@@ -23,7 +23,7 @@ variable "dynamodb_name" {
 variable "hash_key" {
   description = "The attribute to serve as the hash (partition) key. It must also be defined as an attribute."
   type        = string
-  default     = "usuarios"
+  default     = "usuario"
 }
 
 variable "hash_type" {
