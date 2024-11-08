@@ -1,7 +1,8 @@
 import boto3
+import os
 
 # Define the DynamoDB table that Lambda will connect to
-table_name = "usuarios"
+table_name = os.environ['DYNAMODB_TABLE']
 
 # Create the DynamoDB resource
 dynamo = boto3.resource('dynamodb').Table(table_name)

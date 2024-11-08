@@ -13,7 +13,7 @@ resource "aws_lambda_function" "lambda" {
 
   environment {
     variables = {
-      DYNAMODB_TABLE = var.hash_key
+      DYNAMODB_TABLE = var.dynamodb_name
     }
   }
 }
@@ -42,7 +42,7 @@ resource "aws_iam_policy" "dynamodb_access" {
           "dynamodb:UpdateItem",
           "dynamodb:DeleteItem"
         ],
-        Resource = "*"
+        Resource = aws_dynamodb_table.this.arn
       }
     ]
   })
